@@ -7,10 +7,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
+
 public class WebDriverFactory {
 
     private WebDriver driver = null;
     private static final Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
+    private final static String OS_NAME = System.getProperty("os.name");
 
     public WebDriver getWebDriver() {
         String webdriver = System.getProperty("browser", "chrome");
@@ -22,8 +25,10 @@ public class WebDriverFactory {
                 break;
             case "chrome":
                 logger.info("Creating chrome Driver instance");
+                String chromeDriverPath = OS_NAME.toLowerCase().contains("mac") ?
+                        "driver/mac/chromedriver" : "driver/chromedriver.exe";
                 if(driver == null ) {
-                    System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 
                     this.driver =  new ChromeDriver();
                 }

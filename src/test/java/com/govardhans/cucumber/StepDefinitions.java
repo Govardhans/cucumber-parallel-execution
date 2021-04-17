@@ -41,7 +41,7 @@ public class StepDefinitions {
 		logger.info("----");		
 		logger.info("{} in file {} is running ", scenario, file);
 		
-		this.scenario.write("Step executed !!");
+		this.scenario.log("Step executed !!");
 	}	
 	
 }
