@@ -27,15 +27,30 @@
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-picocontainer</artifactId>
+			<artifactId>cucumber-spring</artifactId>
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>2.4.4</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit-jupiter</artifactId>
+					<groupId>org.junit.jupiter</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-vintage-engine</artifactId>
+					<groupId>org.junit.vintage</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>mockito-junit-jupiter</artifactId>
+					<groupId>org.mockito</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -80,6 +95,9 @@
 				<version>2.22.0</version>
 				<configuration>
 					<parallel>methods</parallel>
+					<includes>
+						<include>**/*Test*.java</include>
+					</includes>
 					<!-- <useUnlimitedThreads>true</useUnlimitedThreads> -->
 					<threadCount>2</threadCount>
 				</configuration>

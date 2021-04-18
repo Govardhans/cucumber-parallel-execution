@@ -19,14 +19,14 @@ public class BaseSteps {
         this.webDriverFactory = webDriverFactory;
     }
 
-    @Before
+    @Before("@ui")
     public void testSetup(Scenario scenario) {
         this.scenario = scenario;
         this.driver = webDriverFactory.getWebDriver();
         this.scenario.log("Execution started at :: "+System.currentTimeMillis());
     }
 
-    @After
+    @After("@ui")
     public void tearDown() {
         if (this.scenario.isFailed()) {
             logger.error("scenario failed!! Please check screenshot");
@@ -44,12 +44,12 @@ public class BaseSteps {
 
     }
 
-    @BeforeStep
+    @BeforeStep("@ui")
     public void beforeEachStep() {
         logger.info("before step # {}", scenario.getLine());
     }
 
-    @AfterStep
+    @AfterStep("@ui")
     public void afterEachStep() {
         logger.info("after step # {}", scenario.getLine());
     }

@@ -6,9 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "classpath:features",
+		features = "classpath:hellocucumber",
 		dryRun = false,
 		glue = {"com.govardhans.cucumber"},
+		monochrome = true,
 		plugin = { "pretty", "html:target/cucumber.html" }
 
 		)

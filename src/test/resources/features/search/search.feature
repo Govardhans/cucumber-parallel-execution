@@ -1,3 +1,4 @@
+@ui
 Feature: Search for content
 
   Scenario: Search for information
