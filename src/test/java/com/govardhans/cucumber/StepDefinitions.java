@@ -1,5 +1,6 @@
 package com.govardhans.cucumber;
 
+import com.govardhans.cucumber.utils.TestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,15 +10,20 @@ import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class StepDefinitions {
 	Logger logger = LoggerFactory.getLogger(StepDefinitions.class);
 	Scenario scenario;
+
+	@Autowired
+	TestConfig testConfig;
 	
 	@Before
 	public void testSetup(Scenario scenario) {
 		this.scenario = scenario;
 		logger.info("Before {}", scenario.getName());
+		logger.info("Test Config {} ",testConfig.toString());
 	}
 	
 	@After
