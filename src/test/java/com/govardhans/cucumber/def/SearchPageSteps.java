@@ -12,21 +12,21 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SearchPageSteps {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchPageSteps.class);
+
+    @Autowired
     private HomePage homePage;
+
+    @Autowired
     private SearchResultPage searchResultPage;
-    private final WebDriverFactory webDriverFactory;
+
+    @Autowired
     private WebDriver driver;
 
-    public SearchPageSteps(WebDriverFactory webDriverFactory){
-        this.webDriverFactory = webDriverFactory;
-        driver = this.webDriverFactory.getWebDriver();
-        this.homePage = new HomePageImpl(webDriverFactory);
-        this.searchResultPage = new SearchResultPageImpl(webDriverFactory);
-    }
 
     @Given("I am on the Google search engine")
     public void i_am_on_the_bing_search_engine() {

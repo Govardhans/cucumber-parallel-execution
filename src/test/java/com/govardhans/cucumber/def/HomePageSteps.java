@@ -9,20 +9,16 @@ import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class HomePageSteps {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchPageSteps.class);
+    @Autowired
     private HomePage homePage;
-    private final WebDriverFactory webDriverFactory;
+
+    @Autowired
     private WebDriver driver;
-
-    public HomePageSteps(WebDriverFactory webDriverFactory, HomePageImpl homePageImpl){
-        this.webDriverFactory = webDriverFactory;
-        driver = this.webDriverFactory.getWebDriver();
-        this.homePage = homePageImpl;
-
-    }
 
     @Given("navigate to home page")
     public void navigate_to_home_page() {

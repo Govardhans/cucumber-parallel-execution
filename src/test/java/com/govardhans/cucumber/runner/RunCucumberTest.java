@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "classpath:hellocucumber",
+		features = "classpath:features",
 		dryRun = false,
 		glue = {"com.govardhans.cucumber"},
 		monochrome = true,

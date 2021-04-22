@@ -4,16 +4,16 @@ import com.govardhans.cucumber.config.WebDriverFactory;
 import com.govardhans.cucumber.model.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HomePageImpl implements HomePage {
 
     private String homePageUrl=System.getProperty("env.url", "https://www.google.com/");
 
+    @Autowired
     private WebDriver driver;
-
-    public HomePageImpl(WebDriverFactory driverFactory) {
-        this.driver = driverFactory.getWebDriver();
-    }
 
     @Override
     public void load() {
@@ -24,6 +24,5 @@ public class HomePageImpl implements HomePage {
     public void searchFor(String str) {
         driver.findElement(By.xpath("//input[@name='q']")).sendKeys(str);
         driver.findElement(By.xpath("(//input[@value='Google Search'])[2]")).click();
-        //
     }
 }

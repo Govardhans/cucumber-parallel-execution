@@ -5,15 +5,15 @@ import com.govardhans.cucumber.model.SearchResultPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class SearchResultPageImpl implements SearchResultPage {
+
+    @Autowired
     private WebDriver driver;
 
-    public SearchResultPageImpl(WebDriverFactory driverFactory) {
-        this.driver = driverFactory.getWebDriver();
-    }
 
     @Override
     public String getFirstResultTitle() {

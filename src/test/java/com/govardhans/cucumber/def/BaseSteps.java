@@ -8,32 +8,34 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.Advised;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseSteps {
-    private static Logger logger = LoggerFactory.getLogger(BaseSteps.class);
-    protected WebDriver driver;
-    private final WebDriverFactory webDriverFactory;
-    private Scenario scenario;
 
-    public BaseSteps(WebDriverFactory webDriverFactory) {
-        this.webDriverFactory = webDriverFactory;
-    }
+    private static Logger logger = LoggerFactory.getLogger(BaseSteps.class);
+
+    @Autowired
+    protected WebDriver driver;
+    private Scenario scenario;
 
     @Before("@ui")
     public void testSetup(Scenario scenario) {
         this.scenario = scenario;
-        this.driver = webDriverFactory.getWebDriver();
         this.scenario.log("Execution started at :: "+System.currentTimeMillis());
     }
 
+
+
     @After("@ui")
-    public void tearDown() {
+    public void tearDown() throws Exception {
         if (this.scenario.isFailed()) {
             logger.error("scenario failed!! Please check screenshot");
         }
 
-        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        scenario.attach(screenshot,"image/png", "screenshot.png");
+//        byte[] screenshot = ((TakesScreenshot) getTargetObject(driver, WebDriver.class)).getScreenshotAs(OutputType.BYTES);
+//        scenario.attach(screenshot,"image/png", "screenshot.png");
 
         scenario.log("test case is pass");
 
