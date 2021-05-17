@@ -31,12 +31,12 @@ public class StepDefinitions {
 		logger.info("After {}", scenario.getName());
 	}
 	
-	@BeforeStep
+	@BeforeStep("~@ui")
 	public void beforeEachStep() {
 		logger.info("before step # {}", scenario.getLine());
 	}
 	
-	@AfterStep
+	@AfterStep("~@ui")
 	public void afterEachStep() {
 		logger.info("after step # {}", scenario.getLine());
 	}

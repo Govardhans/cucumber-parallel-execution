@@ -1,6 +1,5 @@
 package com.govardhans.cucumber.def;
 
-import com.govardhans.cucumber.config.WebDriverFactory;
 import io.cucumber.java.*;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.OutputType;
@@ -8,9 +7,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.Advised;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static com.govardhans.cucumber.utils.Helper.getTargetObject;
 
 public class BaseSteps {
 
@@ -23,32 +22,32 @@ public class BaseSteps {
     @Before("@ui")
     public void testSetup(Scenario scenario) {
         this.scenario = scenario;
-        this.scenario.log("Execution started at :: "+System.currentTimeMillis());
+        this.scenario.log("Execution started at :: " + System.currentTimeMillis());
     }
-
 
 
     @After("@ui")
     public void tearDown() throws Exception {
         if (this.scenario.isFailed()) {
             logger.error("scenario failed!! Please check screenshot");
+            try {
+                byte[] screenshot = ((TakesScreenshot) getTargetObject(driver, WebDriver.class)).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", "screenshot.png");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return;
         }
-
-//        byte[] screenshot = ((TakesScreenshot) getTargetObject(driver, WebDriver.class)).getScreenshotAs(OutputType.BYTES);
-//        scenario.attach(screenshot,"image/png", "screenshot.png");
-
         scenario.log("test case is pass");
-
-        if(driver!=null){
+        if (driver != null) {
             logger.info("closing driver");
             driver.quit();
         }
-
     }
 
     @BeforeStep("@ui")
     public void beforeEachStep() {
-        logger.info("before step # {}", scenario.getLine());
+        logger.info("before step # {}", scenario.getSourceTagNames());
     }
 
     @AfterStep("@ui")

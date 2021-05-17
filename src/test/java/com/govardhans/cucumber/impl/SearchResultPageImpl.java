@@ -1,7 +1,6 @@
 package com.govardhans.cucumber.impl;
 
-import com.govardhans.cucumber.config.WebDriverFactory;
-import com.govardhans.cucumber.model.SearchResultPage;
+import com.govardhans.cucumber.pages.SearchResultPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

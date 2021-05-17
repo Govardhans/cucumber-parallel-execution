@@ -1,11 +1,9 @@
 package com.govardhans.cucumber.def;
 
-import com.govardhans.cucumber.config.WebDriverFactory;
-import com.govardhans.cucumber.impl.HomePageImpl;
-import com.govardhans.cucumber.model.HomePage;
-import com.govardhans.cucumber.model.SearchResultPage;
+import com.govardhans.cucumber.pages.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +15,13 @@ public class HomePageSteps {
     @Autowired
     private HomePage homePage;
 
-    @Autowired
-    private WebDriver driver;
-
     @Given("navigate to home page")
     public void navigate_to_home_page() {
         homePage.load();
-        logger.info("driver object {} ", driver);
     }
 
     @Then("verify page title is {string}")
     public void verify_page_title_is(String string) {
-        logger.info("driver object {} ", driver);
+        Assert.assertEquals(string, homePage.getTitle());
     }
 }

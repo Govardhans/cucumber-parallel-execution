@@ -1,10 +1,7 @@
 package com.govardhans.cucumber.def;
 
-import com.govardhans.cucumber.config.WebDriverFactory;
-import com.govardhans.cucumber.impl.HomePageImpl;
-import com.govardhans.cucumber.impl.SearchResultPageImpl;
-import com.govardhans.cucumber.model.HomePage;
-import com.govardhans.cucumber.model.SearchResultPage;
+import com.govardhans.cucumber.pages.HomePage;
+import com.govardhans.cucumber.pages.SearchResultPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,10 +20,6 @@ public class SearchPageSteps {
 
     @Autowired
     private SearchResultPage searchResultPage;
-
-    @Autowired
-    private WebDriver driver;
-
 
     @Given("I am on the Google search engine")
     public void i_am_on_the_bing_search_engine() {

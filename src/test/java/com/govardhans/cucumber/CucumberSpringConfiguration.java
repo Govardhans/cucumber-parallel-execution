@@ -5,8 +5,10 @@ import com.govardhans.cucumber.impl.HomePageImpl;
 import com.govardhans.cucumber.impl.SearchResultPageImpl;
 import com.govardhans.cucumber.utils.TestConfig;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.test.context.ContextConfiguration;
 
+@Lazy
 @CucumberContextConfiguration
 @ContextConfiguration(
         classes = {
