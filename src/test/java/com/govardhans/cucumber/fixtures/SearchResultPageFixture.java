@@ -1,22 +1,24 @@
-package com.govardhans.cucumber.impl;
+package com.govardhans.cucumber.fixtures;
 
 import com.govardhans.cucumber.pages.SearchResultPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class SearchResultPageImpl implements SearchResultPage {
+public class SearchResultPageFixture {
+
 
     @Autowired
-    private WebDriver driver;
+    @Lazy
+    SearchResultPage searchResultPage;
 
-
-    @Override
     public String getFirstResultTitle() {
-        List<WebElement> elements = driver.findElements(By.xpath("//*[@id='search']//h3"));
+        List<WebElement> elements = searchResultPage.getSearchHeader();
         return elements.get(0).getText();
     }
 }

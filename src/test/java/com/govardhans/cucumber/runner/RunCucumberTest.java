@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 		features = "classpath:features/search",
 		dryRun = false,
+		stepNotifications = true,
 		glue = {"com.govardhans.cucumber"},
 		monochrome = true,
 		plugin = { "pretty", "html:target/cucumber.html" }
