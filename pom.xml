@@ -10,11 +10,13 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<cucumber.version>6.8.1</cucumber.version>
+		<cucumber.version>7.5.0</cucumber.version>
 		<junit.version>4.13</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<slf4j.version>1.7.21</slf4j.version>
 		<selenium.version>3.141.59</selenium.version>
+		<lombok.version>1.18.22</lombok.version>
+		<webdrivermanager.version>5.0.3</webdrivermanager.version>
 	</properties>
 
 	<dependencies>
@@ -74,7 +76,38 @@
 			<scope>test</scope>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.12.1</version>
+            <scope>test</scope>
+        </dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jdk8 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
+			<version>2.13.4</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>
@@ -99,7 +132,8 @@
 						<include>**/*Test*.java</include>
 					</includes>
 					<!-- <useUnlimitedThreads>true</useUnlimitedThreads> -->
-					<threadCount>2</threadCount>
+					<threadCount>4</threadCount>
+					<perCoreThreadCount>false</perCoreThreadCount>
 				</configuration>
 			</plugin>
 		</plugins>

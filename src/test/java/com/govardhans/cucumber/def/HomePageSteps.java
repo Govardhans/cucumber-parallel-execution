@@ -18,6 +18,7 @@ public class HomePageSteps {
     @Given("navigate to home page")
     public void navigate_to_home_page() {
         homePage.load();
+        homePage.acceptCookies();
     }
 
     @Then("verify page title is {string}")

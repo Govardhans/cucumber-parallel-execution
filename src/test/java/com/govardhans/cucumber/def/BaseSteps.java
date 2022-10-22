@@ -2,6 +2,7 @@ package com.govardhans.cucumber.def;
 
 import io.cucumber.java.*;
 import io.cucumber.java.en.Given;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.govardhans.cucumber.utils.Helper.getTargetObject;
 
-public class BaseSteps {
 
-    private static Logger logger = LoggerFactory.getLogger(BaseSteps.class);
+@Slf4j
+public class BaseSteps {
 
     @Autowired
     protected WebDriver driver;
@@ -29,7 +30,7 @@ public class BaseSteps {
     @After("@ui")
     public void tearDown() throws Exception {
         if (this.scenario.isFailed()) {
-            logger.error("scenario failed!! Please check screenshot");
+            log.error("scenario failed!! Please check screenshot");
             try {
                 byte[] screenshot = ((TakesScreenshot) getTargetObject(driver, WebDriver.class)).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", "screenshot.png");
@@ -40,24 +41,24 @@ public class BaseSteps {
         }
         scenario.log("test case is pass");
         if (driver != null) {
-            logger.info("closing driver");
+            log.info("closing driver");
             driver.quit();
         }
     }
 
     @BeforeStep("@ui")
     public void beforeEachStep() {
-        logger.info("before step # {}", scenario.getSourceTagNames());
+        log.info("before step # {}", scenario.getSourceTagNames());
     }
 
     @AfterStep("@ui")
     public void afterEachStep() {
-        logger.info("after step # {}", scenario.getLine());
+        log.info("after step # {}", scenario.getLine());
     }
 
     @Given("launch browser")
     public void launch_browser() {
-        logger.info("driver object {} ", driver);
+        log.info("driver object {} ", driver);
 
     }
 }

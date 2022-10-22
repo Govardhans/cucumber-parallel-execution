@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 		dryRun = false,
 		glue = {"com.govardhans.cucumber"},
 		monochrome = true,
+		stepNotifications = true,
+		tags = "@youtube",
 		plugin = { "pretty", "html:target/cucumber.html" }
 
 		)

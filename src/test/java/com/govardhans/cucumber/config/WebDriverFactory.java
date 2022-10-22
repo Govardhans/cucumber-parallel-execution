@@ -1,8 +1,10 @@
 package com.govardhans.cucumber.config;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +28,21 @@ public class WebDriverFactory {
                 }
                 break;
             case "chrome":
-                logger.info("Creating chrome Driver instance");
-                String chromeDriverPath = OS_NAME.toLowerCase().contains("mac") ?
-                        "driver/mac/chromedriver" : "driver/chromedriver.exe";
-                if(driver == null ) {
-                    System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                // options.addArguments("--headless");
+                options.addArguments("-no-sandbox");
+                options.addArguments("--disable-gpu");
 
-                    this.driver =  new ChromeDriver();
-                }
+                this.driver = new ChromeDriver(options);
+//                logger.info("Creating chrome Driver instance");
+//                String chromeDriverPath = OS_NAME.toLowerCase().contains("mac") ?
+//                        "driver/mac/chromedriver" : "driver/chromedriver.exe";
+//                if(driver == null ) {
+//                    System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+//
+//                    this.driver =  new ChromeDriver();
+//                }
                 break;
             default:
                 logger.info("Unsupported webdriver: " + webdriver);
