@@ -1,0 +1,9 @@
+testData:
+  - model: audi
+    subModel:
+      - abc
+      - too
+  - model: bmw
+    subModel:
+      - abc
+      - too
